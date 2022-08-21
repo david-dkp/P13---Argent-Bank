@@ -2,22 +2,16 @@ import Button from "components/Button"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { useMemo } from "react"
+import BankInfo from "components/BankInfo"
 
 const BankItem = ({ bankId, bankName, bankBalance, bankType }) => {
-    const availabilityText = useMemo(() => {
-        if (bankType === "checking") {
-            return "Available Balance"
-        }
-        return "Current Balance"
-    }, [bankType])
-
     return (
         <Container>
-            <BankInfo>
-                <p className="bank-name">{bankName}</p>
-                <h2 className="bank-balance">{bankBalance}</h2>
-                <p className="bank-availability">{availabilityText}</p>
-            </BankInfo>
+            <BankInfo
+                bankName={bankName}
+                bankBalance={bankBalance}
+                bankType={bankType}
+            />
             <Link to={`/bank/${bankId}`}>
                 <Button>View transactions</Button>
             </Link>
@@ -34,23 +28,4 @@ const Container = styled.div`
     padding: 1em;
     border: 2px solid #ccc;
     background-color: white;
-`
-
-const BankInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    color: #333;
-
-    .bank-name {
-        font-size: 0.9em;
-    }
-
-    .bank-balance {
-        font-size: 1.6em;
-    }
-
-    .bank-availability {
-        font-size: 0.7em;
-    }
 `
