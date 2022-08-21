@@ -8,12 +8,12 @@ function App() {
     const isUserLoggedIn = useSelector(selectIsLoggedIn)
     const error = useSelector(selectError)
     console.log(isUserLoggedIn)
-    console.log(error)
+
     useEffect(() => {
         dispatch(
             login({
-                email: "no",
-                password: "no",
+                email: "tony@stark.com",
+                password: "password123",
             })
         )
     }, [])
