@@ -3,7 +3,7 @@ import styled from "styled-components"
 const MyInput = styled.input`
     border: 2px solid #ccc;
     border-radius: 4px;
-    padding: 8px;
+    padding: 0.6em;
     width: 100%;
 
     &::placeholder {
