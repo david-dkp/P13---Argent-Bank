@@ -13,13 +13,13 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (isUserLoggedIn) {
-            navigate("/")
+            navigate("/profile")
         }
     }, [isUserLoggedIn, navigate])
 
     const handleLogin = useCallback(
         (username, password) => {
-            dispatch(login(username, password))
+            dispatch(login({ email: username, password }))
         },
         [dispatch]
     )

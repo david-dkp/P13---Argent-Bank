@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit"
-import { initialState, NAMESPACE } from "."
+import { initialState } from "."
 
-const selectDomain = (state) => state[NAMESPACE] || initialState
+const selectDomain = (state) => state.userSlice || initialState
 
 export const selectUser = createSelector(selectDomain, (state) => state.user)
 
