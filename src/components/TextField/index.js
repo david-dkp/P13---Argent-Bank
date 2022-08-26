@@ -1,5 +1,6 @@
 import styled, { useTheme } from "styled-components"
 import { Stack, Typography } from "@mui/material"
+import { useMemo } from "react"
 
 const MyInput = styled.input`
     border: 2px solid #ccc;
@@ -12,8 +13,9 @@ const MyInput = styled.input`
     }
 `
 
-const TextField = ({ label, placeholder, value, onChange, ...props }) => {
+const TextField = ({ label, placeholder, value, onChange, type, ...props }) => {
     const theme = useTheme()
+
     return (
         <Stack>
             {label && (
@@ -29,6 +31,7 @@ const TextField = ({ label, placeholder, value, onChange, ...props }) => {
                 placeholder={placeholder}
                 value={value}
                 onChange={({ target: { value } }) => onChange(value)}
+                type={type}
             />
         </Stack>
     )

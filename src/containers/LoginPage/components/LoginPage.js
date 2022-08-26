@@ -5,12 +5,14 @@ import {
     Typography,
     Checkbox,
     FormControlLabel,
+    Alert,
+    Collapse,
 } from "@mui/material"
 import Button from "components/Button"
 import Footer from "components/Footer"
 import Navbar from "components/Navbar"
 import TextField from "components/TextField"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useTheme } from "styled-components"
 
 const LoginPage = ({ login, loading }) => {
@@ -18,10 +20,28 @@ const LoginPage = ({ login, loading }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [remember, setRemember] = useState(false)
+    const [error, setError] = useState("")
+    const [showError, setShowError] = useState(false)
 
     const handleSignIn = useCallback(() => {
+        if (username === "") {
+            setError("Username is required")
+            setShowError(true)
+            return
+        }
+        if (password === "") {
+            setError("Password is required")
+            setShowError(true)
+            return
+        }
         login(username, password, remember)
     }, [login, username, password, remember])
+
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => setShowError(false), 3000)
+        }
+    }, [error])
 
     return (
         <Stack sx={{ minHeight: "100vh" }}>
@@ -46,6 +66,9 @@ const LoginPage = ({ login, loading }) => {
                     >
                         Sign In
                     </Typography>
+                    <Collapse in={showError}>
+                        <Alert severity="error">{error}</Alert>
+                    </Collapse>
                     <TextField
                         value={username}
                         onChange={setUsername}
@@ -55,6 +78,7 @@ const LoginPage = ({ login, loading }) => {
                         value={password}
                         onChange={setPassword}
                         label="Password"
+                        type="password"
                     />
                     <Stack direction="row" alignSelf={"start"}>
                         <FormControlLabel
