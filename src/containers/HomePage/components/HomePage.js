@@ -9,6 +9,7 @@ import KeyValueItem from "./KeyValueItem"
 import chatIconUrl from "assets/icon-chat.png"
 import moneyIconUrl from "assets/icon-money.png"
 import securityIconUrl from "assets/icon-security.png"
+import Footer from "components/Footer"
 
 const HomePage = () => {
     const navigate = useNavigate()
@@ -33,7 +34,10 @@ const HomePage = () => {
                     backgroundImage: `url(${bankTreeUrl})`,
                     backgroundSize: "cover",
                     height: ["250px", "400px"],
-                    padding: "2em",
+                    padding: ["2em", "4em"],
+                    display: "flex",
+                    justifyContent: ["center", "end"],
+                    alignItems: "center",
                 }}
             >
                 <Stack
@@ -48,19 +52,26 @@ const HomePage = () => {
                         fontWeight={"bold"}
                         color={theme.text.color}
                         lineHeight={1.2}
+                        fontSize={["1em", "1.8em"]}
                     >
-                        {"No fees.\nNo minimum deposit.\nHigh interest rates."}
+                        No fees.
+                        <br />
+                        No minimum deposit.
+                        <br />
+                        High interest rates.
                     </Typography>
                     <Typography
                         variant="body1"
                         color={theme.text.color}
                         lineHeight={1.2}
+                        fontSize={["0.9em", "1.3em"]}
                     >
-                        {"Open a savings account with Argent Bank today!"}
+                        Open a savings account with <br />
+                        Argent Bank today!
                     </Typography>
                 </Stack>
             </Box>
-            <Stack>
+            <Stack direction={["column", "row"]}>
                 <KeyValueItem
                     iconElement={<img src={chatIconUrl} alt="Chat" />}
                     title="You are our #1 priority"
@@ -79,6 +90,7 @@ const HomePage = () => {
                     is always safe."
                 />
             </Stack>
+            <Footer />
         </Stack>
     )
 }

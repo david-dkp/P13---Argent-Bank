@@ -6,7 +6,7 @@ import MenuItem from "./MenuItem"
 const Navbar = ({ items }) => {
     return (
         <Container
-            maxWidth="md"
+            maxWidth="lg"
             sx={{
                 display: "flex",
                 justifyContent: "space-between",

@@ -7,8 +7,9 @@ const Footer = () => {
                 alignItems={"center"}
                 justifyContent={"center"}
                 sx={{
-                    padding: "1em",
+                    padding: "1.5em",
                     backgroundColor: "white",
+                    borderTop: "1px solid #e6e6e6",
                 }}
             >
                 <Typography variant="body1">
