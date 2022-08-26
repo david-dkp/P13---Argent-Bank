@@ -20,7 +20,7 @@ const HomePage = () => {
             {
                 iconElement: <AccountCircleIcon />,
                 label: "Sign In",
-                onClick: navigate("/signin"),
+                onClick: () => navigate("/signin"),
             },
         ],
         [navigate]

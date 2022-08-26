@@ -1,6 +1,5 @@
 import styled, { useTheme } from "styled-components"
 import { Stack, Typography } from "@mui/material"
-import { useMemo } from "react"
 
 const MyInput = styled.input`
     border: 2px solid #ccc;
