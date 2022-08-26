@@ -13,6 +13,7 @@ const Navbar = ({ items }) => {
                 alignItems: "center",
                 padding: "0.5em",
                 backgroundColor: "white",
+                borderBottom: "1px solid #e6e6e6",
             }}
         >
             <Link to={"/"}>
