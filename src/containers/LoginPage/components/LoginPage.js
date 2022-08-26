@@ -51,6 +51,9 @@ const LoginPage = ({ login, loading }) => {
                     flex: 1,
                     backgroundColor: "#12002B",
                     padding: "2em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "start",
                 }}
             >
                 <Stack
