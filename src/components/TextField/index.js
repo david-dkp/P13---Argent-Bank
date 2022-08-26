@@ -18,7 +18,7 @@ const TextField = ({ label, placeholder, value, onChange, ...props }) => {
         <Stack>
             {label && (
                 <Typography
-                    variant="body2"
+                    variant="body1"
                     fontWeight="bold"
                     color={theme.text.color}
                 >

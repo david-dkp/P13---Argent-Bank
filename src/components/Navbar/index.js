@@ -39,4 +39,8 @@ const Navbar = ({ items }) => {
     )
 }
 
+Navbar.defaultProps = {
+    items: [],
+}
+
 export default Navbar
