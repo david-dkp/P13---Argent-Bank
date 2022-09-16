@@ -8,16 +8,21 @@ import { AccountCircle, Logout } from "@mui/icons-material"
 import { CircularProgress, Container, Grid, Stack } from "@mui/material"
 import TextField from "components/TextField"
 import Button from "components/Button"
+import { selectBanks } from "reducers/transactionSlice/selectors"
+import { getBanks } from "reducers/transactionSlice"
+import BankItem from "components/BankItem"
 
 const ProfilePage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const user = useSelector(selectUser)
+    const banks = useSelector(selectBanks)
     const isLoadingUser = useSelector(selectIsLoading)
 
     useEffect(() => {
         dispatch(getProfile())
+        dispatch(getBanks())
     }, [dispatch])
 
     const [userUiState, setUserUiState] = useState({
@@ -110,6 +115,23 @@ const ProfilePage = () => {
                         </Grid>
                     </Grid>
                 )}
+            </Container>
+            <Container
+                sx={{
+                    backgroundColor: "#D7DEE4",
+                }}
+            >
+                <Stack direction="column" gap={3}>
+                    {banks.map((bank) => (
+                        <BankItem
+                            key={bank.id}
+                            bankBalance={`${bank.balance.currency}${bank.balance.value}`}
+                            bankName={bank.type}
+                            bankId={bank.id}
+                            bankType={bank.type}
+                        />
+                    ))}
+                </Stack>
             </Container>
         </div>
     )
