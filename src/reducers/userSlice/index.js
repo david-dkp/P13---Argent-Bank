@@ -20,6 +20,7 @@ const userSlice = createSlice({
         logout: (state) => {
             state.user = null
             state.isLoggedIn = false
+            state.isLoading = false
             localStorage.removeItem("token")
         },
     },
@@ -43,8 +44,22 @@ const userSlice = createSlice({
             .addCase(getProfile.fulfilled, (state, action) => {
                 state.user = action.payload.body
                 state.isLoading = false
+                if (action.payload.body) {
+                    state.isLoggedIn = true
+                }
             })
             .addCase(getProfile.rejected, (state, action) => {
+                state.error = action.payload.message
+                state.isLoading = false
+            })
+            .addCase(updateProfile.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.user = action.payload.body
+                state.isLoading = false
+            })
+            .addCase(updateProfile.rejected, (state, action) => {
                 state.error = action.payload.message
                 state.isLoading = false
             })
@@ -57,7 +72,7 @@ export default userSlice.reducer
 
 export const login = createAsyncThunk(
     NAMESPACE + "/login",
-    async ({ email, password }) => {
+    async ({ email, password, remember }) => {
         const response = await fetch(userUrl + "/login", {
             method: "POST",
             headers: {
@@ -68,6 +83,7 @@ export const login = createAsyncThunk(
                 password,
             }),
         })
+        localStorage.setItem("remember", remember)
         const data = await response.json()
         return data
     }
@@ -85,9 +101,9 @@ export const getProfile = createAsyncThunk(userUrl + "/profile", async () => {
 })
 
 export const updateProfile = createAsyncThunk(
-    userUrl + "/profile",
-    ({ firstName, lastName }) => {
-        const response = fetch(userUrl + "/profile", {
+    userUrl + "/profile/update",
+    async ({ firstName, lastName }) => {
+        const response = await fetch(userUrl + "/profile", {
             method: "PUT",
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
@@ -98,7 +114,7 @@ export const updateProfile = createAsyncThunk(
                 lastName,
             }),
         })
-        const data = response.json()
+        const data = await response.json()
         return data
     }
 )

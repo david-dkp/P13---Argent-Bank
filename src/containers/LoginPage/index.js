@@ -18,8 +18,8 @@ const LoginPage = () => {
     }, [isUserLoggedIn, navigate])
 
     const handleLogin = useCallback(
-        (username, password) => {
-            dispatch(login({ email: username, password }))
+        (username, password, remember) => {
+            dispatch(login({ email: username, password, remember }))
         },
         [dispatch]
     )

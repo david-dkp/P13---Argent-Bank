@@ -27,7 +27,7 @@ const MyButton = styled.button`
     border: none;
     background-color: ${({ theme, variant }) => {
         if (variant === "outlined") {
-            return "transparent"
+            return "white"
         }
 
         return theme.colors.primary
