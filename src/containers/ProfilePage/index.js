@@ -11,6 +11,9 @@ import Button from "components/Button"
 import { selectBanks } from "reducers/transactionSlice/selectors"
 import { getBanks } from "reducers/transactionSlice"
 import BankItem from "components/BankItem"
+import { formatNumberWithComas } from "utils/numberUtils"
+import { Box } from "@mui/system"
+import Footer from "components/Footer"
 
 const ProfilePage = () => {
     const navigate = useNavigate()
@@ -42,7 +45,7 @@ const ProfilePage = () => {
     }, [user])
 
     return (
-        <div>
+        <Stack direction="column" sx={{ minHeight: "100vh" }}>
             <Navbar
                 items={[
                     {
@@ -119,21 +122,25 @@ const ProfilePage = () => {
             <Container
                 sx={{
                     backgroundColor: "#D7DEE4",
+                    flex: 1,
+                    paddingBlock: "2em",
                 }}
             >
                 <Stack direction="column" gap={3}>
                     {banks.map((bank) => (
                         <BankItem
                             key={bank.id}
-                            bankBalance={`${bank.balance.currency}${bank.balance.value}`}
-                            bankName={bank.type}
+                            bankBalance={`${
+                                bank.balance.currency
+                            }${formatNumberWithComas(bank.balance.value)}`}
                             bankId={bank.id}
                             bankType={bank.type}
                         />
                     ))}
                 </Stack>
             </Container>
-        </div>
+            <Footer />
+        </Stack>
     )
 }
 export default ProfilePage

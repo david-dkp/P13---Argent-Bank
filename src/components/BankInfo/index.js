@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const BankInfo = ({ bankName, bankBalance, bankType, ...props }) => {
     const availabilityText = useMemo(() => {
-        if (bankType === "checking") {
+        if (bankType === "bankChecking" || bankType === "bankSavings") {
             return "Available Balance"
         }
         return "Current Balance"
