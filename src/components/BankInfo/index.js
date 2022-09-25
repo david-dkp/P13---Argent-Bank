@@ -37,4 +37,8 @@ const Container = styled.div`
     .bank-availability {
         font-size: 0.7em;
     }
+
+    @media (max-width: 768px) {
+        font-size: 1.3em;
+    }
 `

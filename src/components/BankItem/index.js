@@ -17,8 +17,8 @@ const BankItem = ({ bankId, bankBalance, bankType }) => {
                 bankBalance={bankBalance}
                 bankType={bankType}
             />
-            <Link to={`/bank/${bankId}`}>
-                <Button>View transactions</Button>
+            <Link to={`/bank/${bankId}`} className="btn-transaction">
+                <Button fullWidth>View transactions</Button>
             </Link>
         </Container>
     )
@@ -33,4 +33,14 @@ const Container = styled.div`
     padding: 1em;
     border: 2px solid #ccc;
     background-color: white;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 1em;
+        align-items: flex-start;
+
+        .btn-transaction {
+            width: 100%;
+        }
+    }
 `

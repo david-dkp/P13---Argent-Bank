@@ -14,6 +14,7 @@ const Navbar = ({ items }) => {
                 padding: "0.5em",
                 backgroundColor: "white",
                 borderBottom: "1px solid #e6e6e6",
+                overflow: "hidden",
             }}
         >
             <Link to={"/"}>
@@ -25,7 +26,11 @@ const Navbar = ({ items }) => {
                 />
             </Link>
 
-            <Stack direction="row" spacing={2}>
+            <Stack
+                sx={{ overflow: "hidden", flex: 1, justifyContent: "flex-end" }}
+                direction="row"
+                spacing={2}
+            >
                 {items.map(({ iconElement, label, onClick }) => (
                     <MenuItem
                         key={label}
