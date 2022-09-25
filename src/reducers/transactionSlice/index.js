@@ -18,14 +18,28 @@ const transactionSlice = createSlice({
             state.banks = banks
         },
         getTransactions: (state) => {
+            if (state.transactions.length > 0) {
+                return
+            }
             state.transactions = transactions
         },
         getTransactionsByBankId: (state) => {
+            if (state.transactions.length > 0) {
+                return
+            }
             state.transactions = transactions
         },
         getBankById: (state, action) => {
             const bank = banks.find((bank) => bank.id === action.payload)
             state.banks.push(bank)
+        },
+        updateTransaction: (state, action) => {
+            const { id, notes, category } = action.payload
+            const transaction = state.transactions.find(
+                (transaction) => transaction.id === id
+            )
+            transaction.customData.notes = notes
+            transaction.customData.category = category
         },
     },
 })
@@ -35,6 +49,7 @@ export const {
     getBanks,
     getTransactions,
     getBankById,
+    updateTransaction,
 } = transactionSlice.actions
 
 export default transactionSlice.reducer

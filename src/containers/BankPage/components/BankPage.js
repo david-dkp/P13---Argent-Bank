@@ -15,7 +15,7 @@ import AppBar from "containers/AppBar"
 import { getBankName } from "utils/bankUtils"
 import { formatNumberWithComas } from "utils/numberUtils"
 
-const BankPage = ({ bank, transactions = [] }) => {
+const BankPage = ({ bank, transactions = [], onCategoryEdit, onNotesEdit }) => {
     return (
         <Stack direction="column" minHeight={"100vh"}>
             <AppBar />
@@ -78,6 +78,12 @@ const BankPage = ({ bank, transactions = [] }) => {
                                 type={transaction.type}
                                 key={transaction.id}
                                 categories={["Food", "Transportation"]}
+                                onCategoryEdit={(category) =>
+                                    onCategoryEdit(transaction.id, category)
+                                }
+                                onNotesEdit={(notes) =>
+                                    onNotesEdit(transaction.id, notes)
+                                }
                             />
                         ))}
                     </TableBody>

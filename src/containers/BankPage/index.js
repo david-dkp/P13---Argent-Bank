@@ -1,7 +1,11 @@
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getBankById, getTransactionsByBankId } from "reducers/transactionSlice"
+import {
+    getBankById,
+    getTransactionsByBankId,
+    updateTransaction,
+} from "reducers/transactionSlice"
 import {
     selectBankById,
     selectTransactionsByBankId,
@@ -20,7 +24,50 @@ const BankPage = () => {
         dispatch(getTransactionsByBankId(params.bankId))
     }, [])
 
-    return <BankPageComponent bank={bank} transactions={transactions} />
+    const onCategoryEdit = useCallback(
+        (transactionId, category) => {
+            const transaction = transactions.find(
+                (transaction) => transaction.id === transactionId
+            )
+            if (transaction) {
+                dispatch(
+                    updateTransaction({
+                        id: transactionId,
+                        category,
+                        notes: transaction.customData.notes,
+                    })
+                )
+            }
+        },
+        [dispatch, transactions]
+    )
+
+    const onNotesEdit = useCallback(
+        (transactionId, notes) => {
+            const transaction = transactions.find(
+                (transaction) => transaction.id === transactionId
+            )
+            if (transaction) {
+                dispatch(
+                    updateTransaction({
+                        id: transactionId,
+                        category: transaction.customData.category,
+                        notes,
+                    })
+                )
+            }
+        },
+        [dispatch, transactions]
+    )
+
+    return (
+        <BankPageComponent
+            onNotesEdit={onNotesEdit}
+            onCategoryEdit={onCategoryEdit}
+            bank={bank}
+            transactions={transactions}
+        />
+    )
 }
 
 export default BankPage
