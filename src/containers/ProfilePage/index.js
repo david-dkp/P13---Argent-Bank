@@ -41,6 +41,15 @@ const ProfilePage = () => {
         })
     }, [user])
 
+    useEffect(
+        () =>
+            setUserUiState({
+                firstName: user?.firstName || "",
+                lastName: user?.lastName || "",
+            }),
+        [user]
+    )
+
     return (
         <Stack direction="column" sx={{ minHeight: "100vh" }}>
             <AppBar />
