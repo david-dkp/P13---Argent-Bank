@@ -1,10 +1,12 @@
 import {
     Box,
     CircularProgress,
+    Paper,
     Stack,
     Table,
     TableBody,
     TableCell,
+    TableContainer,
     TableHead,
     TableRow,
 } from "@mui/material"
@@ -48,7 +50,7 @@ const BankPage = ({ bank, transactions = [], onCategoryEdit, onNotesEdit }) => {
                     <CircularProgress />
                 )}
             </Stack>
-            <Stack
+            <TableContainer
                 sx={{
                     backgroundColor: "#D7DEE4",
                     padding: 5,
@@ -88,7 +90,7 @@ const BankPage = ({ bank, transactions = [], onCategoryEdit, onNotesEdit }) => {
                         ))}
                     </TableBody>
                 </Table>
-            </Stack>
+            </TableContainer>
             <Footer />
         </Stack>
     )
