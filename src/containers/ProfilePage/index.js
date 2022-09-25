@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { getProfile, logout, updateProfile } from "reducers/userSlice"
+import { getProfile, updateProfile } from "reducers/userSlice"
 import { selectIsLoading, selectUser } from "reducers/userSlice/selectors"
-import Navbar from "components/Navbar"
-import { AccountCircle, Logout } from "@mui/icons-material"
 import { CircularProgress, Container, Grid, Stack } from "@mui/material"
 import TextField from "components/TextField"
 import Button from "components/Button"
@@ -12,11 +10,10 @@ import { selectBanks } from "reducers/transactionSlice/selectors"
 import { getBanks } from "reducers/transactionSlice"
 import BankItem from "components/BankItem"
 import { formatNumberWithComas } from "utils/numberUtils"
-import { Box } from "@mui/system"
 import Footer from "components/Footer"
+import AppBar from "containers/AppBar"
 
 const ProfilePage = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const user = useSelector(selectUser)
@@ -46,22 +43,7 @@ const ProfilePage = () => {
 
     return (
         <Stack direction="column" sx={{ minHeight: "100vh" }}>
-            <Navbar
-                items={[
-                    {
-                        iconElement: <AccountCircle />,
-                        label: user && user.firstName,
-                        onClick: () => navigate("/profile"),
-                    },
-                    {
-                        iconElement: <Logout />,
-                        label: "Sign out",
-                        onClick: () => {
-                            dispatch(logout())
-                        },
-                    },
-                ]}
-            />
+            <AppBar />
             <Container
                 sx={{
                     display: "flex",

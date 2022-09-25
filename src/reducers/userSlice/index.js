@@ -9,7 +9,7 @@ const userUrl = configs.apiBaseUrl + "/user"
 export const initialState = {
     user: null,
     isLoggedIn: false,
-    isLoading: false,
+    isLoading: true,
     error: null,
 }
 
@@ -35,7 +35,7 @@ const userSlice = createSlice({
                 state.isLoading = false
             })
             .addCase(login.rejected, (state, action) => {
-                state.error = action.payload.message
+                state.error = action.payload?.message || "Something went wrong"
                 state.isLoading = false
             })
             .addCase(getProfile.pending, (state) => {

@@ -14,5 +14,12 @@ export const selectTransactions = createSelector(
     selectDomain,
     (state) => state.transactions
 )
+export const selectTransactionsByBankId = (bankId) =>
+    createSelector(selectTransactions, (transactions) => transactions)
 
 export const selectBanks = createSelector(selectDomain, (state) => state.banks)
+export const selectBankById = (id) => {
+    return createSelector(selectBanks, (banks) => {
+        return banks.find((bank) => bank.id === id)
+    })
+}

@@ -9,6 +9,8 @@ import {
     TableCell,
     TableRow,
 } from "@mui/material"
+import { makeStyles } from "@mui/styles"
+
 import {
     ArrowDownward,
     ArrowDropDown,
@@ -17,6 +19,12 @@ import {
     KeyboardArrowDown,
     Check,
 } from "@mui/icons-material"
+
+const useStyles = makeStyles((theme) => ({
+    iconOpen: {
+        transform: "rotate(0deg)",
+    },
+}))
 
 const TransactionItem = ({
     date,
@@ -34,6 +42,8 @@ const TransactionItem = ({
     const [open, setOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [edittingNotes, setEdittingNotes] = useState(notes)
+
+    const classes = useStyles()
 
     const formattedDate = useMemo(() => {
         return date.toLocaleDateString("en-US", {
@@ -65,7 +75,9 @@ const TransactionItem = ({
                     "& > *": {
                         borderBottom: "none",
                         fontSize: "1em",
+                        fontWeight: "bold",
                     },
+                    backgroundColor: "white",
                 }}
             >
                 <TableCell>
@@ -83,6 +95,7 @@ const TransactionItem = ({
                     "& > *": {
                         fontSize: "0.9em",
                     },
+                    backgroundColor: "white",
                 }}
             >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} />
@@ -100,6 +113,9 @@ const TransactionItem = ({
                                         "& > *": {
                                             border: "none",
                                         },
+                                    }}
+                                    classes={{
+                                        iconOpen: classes.iconOpen,
                                     }}
                                     value={category}
                                     onChange={(e) =>

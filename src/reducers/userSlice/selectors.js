@@ -15,4 +15,10 @@ export const selectIsLoading = createSelector(
     (state) => state.isLoading
 )
 
+export const selectIsLoggingIn = createSelector(
+    selectIsLoading,
+    selectIsLoggedIn,
+    (isLoading, isLoggedIn) => isLoading && !isLoggedIn
+)
+
 export const selectError = createSelector(selectDomain, (state) => state.error)
