@@ -4,6 +4,7 @@ import LoginPage from "containers/LoginPage"
 import ProfilePage from "containers/ProfilePage"
 import RequireAuth from "containers/RequireAuth"
 import BankPage from "containers/BankPage"
+import NotRequireAuth from "containers/NotRequireAuth"
 
 function App() {
     return (
@@ -18,7 +19,15 @@ function App() {
                     </RequireAuth>
                 }
             />
-            <Route path="/" exact element={<HomePage />} />
+            <Route
+                path="/"
+                exact
+                element={
+                    <NotRequireAuth>
+                        <HomePage />
+                    </NotRequireAuth>
+                }
+            />
             <Route
                 path="/bank/:bankId"
                 exact

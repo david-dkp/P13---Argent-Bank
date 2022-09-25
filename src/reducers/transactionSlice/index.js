@@ -30,8 +30,14 @@ const transactionSlice = createSlice({
             state.transactions = transactions
         },
         getBankById: (state, action) => {
-            const bank = banks.find((bank) => bank.id === action.payload)
-            state.banks.push(bank)
+            const fakeBank = banks.find((bank) => bank.id === action.payload)
+            const bank = state.banks.find((bank) => bank.id === action.payload)
+
+            if (!bank) {
+                state.banks.push(fakeBank)
+            }
+
+            return state
         },
         updateTransaction: (state, action) => {
             const { id, notes, category } = action.payload
