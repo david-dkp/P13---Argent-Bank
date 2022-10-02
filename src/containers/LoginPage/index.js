@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { login } from "reducers/userSlice"
-import { selectIsLoggedIn } from "reducers/userSlice/selectors"
+import { selectError, selectIsLoggedIn } from "reducers/userSlice/selectors"
 import LoginPageComponent from "./components/LoginPage"
 
 const LoginPage = () => {
@@ -10,6 +10,7 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const isUserLoggedIn = useSelector(selectIsLoggedIn)
+    const error = useSelector(selectError)
 
     useEffect(() => {
         if (isUserLoggedIn) {
@@ -24,7 +25,7 @@ const LoginPage = () => {
         [dispatch]
     )
 
-    return <LoginPageComponent login={handleLogin} />
+    return <LoginPageComponent error={error} login={handleLogin} />
 }
 
 export default LoginPage

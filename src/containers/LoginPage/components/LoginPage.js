@@ -15,14 +15,13 @@ import TextField from "components/TextField"
 import { useCallback, useEffect, useState } from "react"
 import { useTheme } from "styled-components"
 
-const LoginPage = ({ login, loading }) => {
+const LoginPage = ({ error: networkError, login, loading }) => {
     const theme = useTheme()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [remember, setRemember] = useState(false)
     const [error, setError] = useState("")
     const [showError, setShowError] = useState(false)
-
     const handleSignIn = useCallback(() => {
         if (username === "") {
             setError("Username is required")
@@ -42,6 +41,13 @@ const LoginPage = ({ login, loading }) => {
             setTimeout(() => setShowError(false), 3000)
         }
     }, [error])
+
+    useEffect(() => {
+        if (networkError) {
+            setError(networkError)
+            setShowError(true)
+        }
+    }, [networkError])
 
     return (
         <Stack sx={{ minHeight: "100vh" }}>

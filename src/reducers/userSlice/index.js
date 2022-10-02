@@ -30,12 +30,16 @@ const userSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(login.fulfilled, (state, action) => {
+                if (action.payload.status === 400) {
+                    state.error = action.payload.message
+                    return
+                }
                 localStorage.setItem("token", action.payload.body.token)
                 state.isLoggedIn = true
                 state.isLoading = false
             })
             .addCase(login.rejected, (state, action) => {
-                state.error = action.payload?.message || "Something went wrong"
+                state.error = action?.payload?.message || "Something went wrong"
                 state.isLoading = false
             })
             .addCase(getProfile.pending, (state) => {
@@ -49,7 +53,7 @@ const userSlice = createSlice({
                 }
             })
             .addCase(getProfile.rejected, (state, action) => {
-                state.error = action.payload.message
+                state.error = action?.payload?.message || "Something went wrong"
                 state.isLoading = false
             })
             .addCase(updateProfile.pending, (state) => {
