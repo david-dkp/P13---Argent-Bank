@@ -24,6 +24,10 @@ const NotRequireAuth = ({ children }) => {
         }
     }, [isLoggingIn, isLoggedIn, navigate])
 
+    if (isLoggingIn) {
+        return null
+    }
+
     return children
 }
 

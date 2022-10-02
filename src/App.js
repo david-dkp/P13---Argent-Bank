@@ -9,7 +9,15 @@ import NotRequireAuth from "containers/NotRequireAuth"
 function App() {
     return (
         <Routes>
-            <Route path="/signin" exact element={<LoginPage />} />
+            <Route
+                path="/signin"
+                exact
+                element={
+                    <NotRequireAuth>
+                        <LoginPage />
+                    </NotRequireAuth>
+                }
+            />
             <Route
                 path="/profile"
                 exact
